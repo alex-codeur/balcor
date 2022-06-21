@@ -2,21 +2,68 @@
 // https://www.npmjs.com/package/convert-excel-to-json
 // https://github.com/DiegoZoracKy/convert-excel-to-json/
 
-let express = require('express');
-let app = express();
-let upload = require("express-fileupload");
-let importExcel = require('convert-excel-to-json');
-let del = require('del');
-let xlsx = require('xlsx');
-let fs = require('fs');
+
+// Imports
+const express = require('express');
+const upload = require("express-fileupload");
+const importExcel = require('convert-excel-to-json');
+const del = require('del');
+const xlsx = require('xlsx');
+const fs = require('fs');
+const expressLayouts = require('express-ejs-layouts');
+
+// express app
+const app = express();
+
+// Static Files
+app.use(express.static('public'));
+app.use('/css', express.static(__dirname + 'public/css'));
+app.use('/js', express.static(__dirname + 'public/js'));
+app.use('/img', express.static(__dirname + 'public/img'));
+
+// register view engine
+app.use(expressLayouts);
+app.set('layout', './layouts/full-width');
+app.set('view engine', 'ejs');
+
+// listen for requests
+app.listen(3000, () => {
+    console.log('application demarre sur le port 3000');
+});
+
+// Navigation
+app.get('/', (req, res) => {
+    const posts = [
+        { title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor, sit amet consectetur' },
+        { title: 'Mario finds stars', snippet: 'Lorem ipsum dolor, sit amet consectetur' },
+        { title: 'How to defeat browser', snippet: 'Lorem ipsum dolor, sit amet consectetur' },
+    ];
+
+    res.render('index', { title: 'Home', posts });
+});
+
+app.get('/about', (req, res) => {
+    res.render('about', { title: 'About' });
+});
+
+app.get('/blogs/create', (req, res) => {
+    res.render('createPost', { title: 'Create a new post' });
+});
+
+// 404 page
+app.use((req, res) => {
+    res.status(404).render('404', { title: '404' });
+});
 
 app.use(upload());
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+
+
+app.get('/app', (req, res) => {
+    res.sendFile(__dirname + '/app.html');
 });
 
-app.post('/', (req, res) => {
+app.post('/app', (req, res) => {
     let file = req.files.filename;
     let filename = file.name;
 
@@ -92,8 +139,6 @@ app.post('/', (req, res) => {
 
             res.send(result);
 
-            console.log('Donnees recus !');
-
             del(['excel/' + filename]).then(paths => {
                 console.log('Le fichier ' + filename + 'a ete supprime !');
             });
@@ -112,8 +157,4 @@ app.post('/', (req, res) => {
     xlsx.utils.book_append_sheet(newWB, newWS2, 'Fournitures');
 
     xlsx.writeFile(newWB, "./newexcel/newExcel.xlsx");
-});
-
-app.listen(3000, () => {
-    console.log('application demarre sur le port 3000');
 });
