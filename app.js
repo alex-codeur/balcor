@@ -11,6 +11,8 @@ const del = require('del');
 const xlsx = require('xlsx');
 const fs = require('fs');
 const expressLayouts = require('express-ejs-layouts');
+const jsonToHtml = require('node-json2html');
+const jsonHtml = require('json2html');
 
 // express app
 const app = express();
@@ -25,6 +27,7 @@ app.use('/img', express.static(__dirname + 'public/img'));
 app.use(expressLayouts);
 app.set('layout', './layouts/full-width');
 app.set('view engine', 'ejs');
+app.use(upload());
 
 // listen for requests
 app.listen(3000, () => {
@@ -33,37 +36,14 @@ app.listen(3000, () => {
 
 // Navigation
 app.get('/', (req, res) => {
-    const posts = [
-        { title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor, sit amet consectetur' },
-        { title: 'Mario finds stars', snippet: 'Lorem ipsum dolor, sit amet consectetur' },
-        { title: 'How to defeat browser', snippet: 'Lorem ipsum dolor, sit amet consectetur' },
-    ];
-
-    res.render('index', { title: 'Home', posts });
+    res.render('index');
 });
 
-app.get('/about', (req, res) => {
-    res.render('about', { title: 'About' });
+app.get('/balcor', (req, res) => {
+    res.render('balcor', { layout: './layouts/balcor-layout' });
 });
 
-app.get('/blogs/create', (req, res) => {
-    res.render('createPost', { title: 'Create a new post' });
-});
-
-// 404 page
-app.use((req, res) => {
-    res.status(404).render('404', { title: '404' });
-});
-
-app.use(upload());
-
-
-
-app.get('/app', (req, res) => {
-    res.sendFile(__dirname + '/app.html');
-});
-
-app.post('/app', (req, res) => {
+app.post('/balcor', (req, res) => {
     let file = req.files.filename;
     let filename = file.name;
 
@@ -136,12 +116,11 @@ app.post('/app', (req, res) => {
             fs.writeFileSync("./data/data.json", JSON.stringify(newData, null, 2));
             fs.writeFileSync("./data/data2.json", JSON.stringify(newData2, null, 2));
 
-
-            res.send(result);
-
             del(['excel/' + filename]).then(paths => {
                 console.log('Le fichier ' + filename + 'a ete supprime !');
             });
+
+            res.render('balcor', { layout: './layouts/balcor-layout' });
         }
     });
 
@@ -157,4 +136,10 @@ app.post('/app', (req, res) => {
     xlsx.utils.book_append_sheet(newWB, newWS2, 'Fournitures');
 
     xlsx.writeFile(newWB, "./newexcel/newExcel.xlsx");
+})
+
+// 404 page
+app.use((req, res) => {
+    res.status(404).render('404', { title: '404', layout: './layouts/balcor-layout' });
 });
+;

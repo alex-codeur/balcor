@@ -1,21 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CORE AGENCY | <%= title %></title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-    <%- include('../partials/_nav.ejs') %> 
+<html lang="en" style="scroll-behavior: smooth;">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <div class="container">
-        <%- body %> 
-    </div>
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/png">
 
-    <%- include('../partials/_footer.ejs') %>
+    <title>Shine - TailwindCSS Startup and SaaS Landing Page Template</title>
 
-    <script src="js/script.js"></script>
-</body>
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="assets/css/LineIcons.2.0.css">
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <!-- Tiny Slider  -->
+    <link rel="stylesheet" type="text/css" href="assets/css/tiny-slider.css">
+    <!-- Tailwind css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/tailwind.css">
+  </head>
+  <body>
+
+    <!-- Header Area wrapper Starts -->
+    <%- include('../partials/_header.ejs') %> 
+    <!-- Header Area wrapper End -->
+
+    <!-- Hero Area Start -->
+    <%- include('../partials/_hero.ejs') %> 
+    <!-- Hero Area End -->
+
+    <!-- Services Section Start -->
+    <%- include('../partials/_services.ejs') %> 
+    <!-- Services Section End -->
+
+
+    <!-- Feature Section Start -->
+    <%- include('../partials/_feature.ejs') %> 
+    <!-- Feature Section End -->
+
+    <!-- Team Section Start -->
+    <%- include('../partials/_team.ejs') %> 
+    <!-- Team Section End -->
+
+    <!-- Clients Section Start -->
+    <%- include('../partials/_clients.ejs') %> 
+    <!-- Clients Section End -->
+
+    <!-- Testimonial Section Start -->
+    <%- include('../partials/_testimonial.ejs') %> 
+    <!-- Testimonial Section End -->  
+
+    <!-- Pricing section Start --> 
+    <%- include('../partials/_pricing.ejs') %> 
+    <!-- Pricing Table Section End -->
+
+    <!-- carousel-area Section Start -->
+    <%- include('../partials/_carousel.ejs') %> 
+    <!-- carousel-area Section End -->
+
+    <!-- Subscribe Section Start -->
+    <%- include('../partials/_subscribe.ejs') %> 
+    <!-- Subscribe Section End -->
+
+    <!-- Contact Section Start -->
+    <%- include('../partials/_contact.ejs') %> 
+    <!-- Contact Section End -->
+  
+    <!-- Map Section Start -->
+    <%- include('../partials/_map.ejs') %> 
+    <!-- Map Section End -->
+
+	  <!-- Footer Section Start -->
+    <%- include('../partials/_footer.ejs') %>  
+    <!-- Footer Section End -->
+
+    <section class="bg-gray-800 py-6 border-t-2 border-gray-700 border-dotted">
+      <div class="container">
+        <div class="flex flex-wrap">
+          <div class="w-full text-center">
+            <p class="text-white">Designed and Developed by <a class="text-white duration-300 hover:text-blue-600" href="https://tailwindtemplates.co" rel="nofollow">TailwindTemplates</a> and <a class="text-white duration-300 hover:text-blue-600" href="https://uideck.com" rel="nofollow">UIdeck</a></p>
+          </div>
+        </div>
+      </div>
+    </section>   
+
+    <!-- Go to Top Link -->
+    <a href="#" class="back-to-top w-10 h-10 fixed bottom-0 right-0 mb-5 mr-5 flex items-center justify-center rounded-full bg-blue-600 text-white text-lg z-20 duration-300 hover:bg-blue-400">
+      <i class="lni lni-arrow-up"></i>
+    </a>
+    
+    <!-- Preloader -->
+<!--     <div id="preloader">
+      <div class="loader" id="loader-1"></div>
+    </div> -->
+    <!-- End Preloader -->
+    
+    <!-- All js Here -->
+    <script src="assets/js/wow.js"></script>
+    <script src="assets/js/tiny-slider.js"></script>
+    <script src="assets/js/contact-form.js"></script>      
+    <script src="assets/js/main.js"></script>      
+  </body>
 </html>
