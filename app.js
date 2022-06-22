@@ -13,6 +13,10 @@ const fs = require('fs');
 const expressLayouts = require('express-ejs-layouts');
 const jsonToHtml = require('node-json2html');
 const jsonHtml = require('json2html');
+const _ = require('lodash');
+const xlsToJSON = require("excel-to-clean-json");
+
+// const { donnees } = require('./public/js/balance.js');
 
 // express app
 const app = express();
@@ -47,74 +51,24 @@ app.post('/balcor', (req, res) => {
     let file = req.files.filename;
     let filename = file.name;
 
+
+
     file.mv('./excel/' + filename, (err) => {
         if (err) {
             res.send('maaf gagal upload !');
         } else {
-            let result = importExcel({
-                sourceFile: './excel/' + filename,
-                sheets: [{
-                    name: 'Produits',
-                    header: {
-                        rows: 1
-                    },
-                    columnToKey: {
-                        A: "NOM",
-                        B: "PRIX",
-                        C: "QUANTITE",
-                        D: "DATE",
-                        E: "PAYE"
-                    }
-                }, {
-                    name: 'Fournitures',
-                    header: {
-                        rows: 1
-                    },
-                    columnToKey: {
-                        A: "NOM",
-                        B: "MONTANT",
-                        C: "NOMBRE",
-                        D: "ETAT"
-                    }
-                }]
+            let result = xlsToJSON.json("./excel/" + filename, "Balance");
+
+            let result2 = importExcel({
+                sourceFile: './excel/plan.xlsx'
             });
 
-            const wb = xlsx.readFile('./excel/' + filename, { dateNF: "dd/mm/yyyy" });
-            const ws = wb.Sheets['Produits'];
-            const ws2 = wb.Sheets['Fournitures'];
-            const data = xlsx.utils.sheet_to_json(ws, { raw: false });
-            const data2 = xlsx.utils.sheet_to_json(ws2, { raw: false });
+            let resultat = JSON.stringify(result, null, 2);
+            let resultat2 = JSON.stringify(result2, null, 2);
 
-            let newData = [];
-            let newData2 = [];
+            fs.writeFileSync('./public/js/balance.js', `const data = ${resultat}`);
+            fs.writeFileSync('./public/js/balance2.js', `const data = ${resultat2}`);
 
-            newData = data.map(d => {
-                if (d.PAYE === "oui") {
-                    d.PAYE = true;
-                }
-
-                if (d.PAYE === "non") {
-                    d.PAYE = false;
-                }
-
-                return d;
-            });
-
-            newData2 = data2.map(d => {
-                if (d.ETAT === "neuf") {
-                    d.ETAT = "vieux";
-                }
-
-                if (d.ETAT === "vieux") {
-                    d.ETAT = "neuf";
-                }
-
-                return d;
-            });
-
-
-            fs.writeFileSync("./data/data.json", JSON.stringify(newData, null, 2));
-            fs.writeFileSync("./data/data2.json", JSON.stringify(newData2, null, 2));
 
             del(['excel/' + filename]).then(paths => {
                 console.log('Le fichier ' + filename + 'a ete supprime !');
@@ -123,19 +77,6 @@ app.post('/balcor', (req, res) => {
             res.render('balcor', { layout: './layouts/balcor-layout' });
         }
     });
-
-    let content = JSON.parse(fs.readFileSync("data/data.json", "utf-8"));
-    let content2 = JSON.parse(fs.readFileSync("data/data2.json", "utf-8"));
-
-    let newWB = xlsx.utils.book_new();
-
-    let newWS = xlsx.utils.json_to_sheet(content);
-    let newWS2 = xlsx.utils.json_to_sheet(content2);
-
-    xlsx.utils.book_append_sheet(newWB, newWS, 'Produits');
-    xlsx.utils.book_append_sheet(newWB, newWS2, 'Fournitures');
-
-    xlsx.writeFile(newWB, "./newexcel/newExcel.xlsx");
 })
 
 // 404 page

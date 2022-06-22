@@ -13,10 +13,12 @@
     "convert-excel-to-json": "^1.7.0",
     "del": "^6.1.1",
     "ejs": "^3.1.8",
+    "excel-to-clean-json": "^0.0.3",
     "express": "^4.18.1",
     "express-ejs-layouts": "^2.5.1",
     "express-fileupload": "^1.4.0",
     "json2html": "^0.0.8",
+    "lodash": "^4.17.21",
     "node-json2html": "^2.2.2",
     "xlsx": "^0.18.5"
   },
