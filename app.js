@@ -67,7 +67,7 @@ app.post('/balcor', (req, res) => {
             let resultat2 = JSON.stringify(result2, null, 2);
 
             fs.writeFileSync('./public/js/balance.js', `const data = ${resultat}`);
-            fs.writeFileSync('./public/js/balance2.js', `const data = ${resultat2}`);
+            fs.writeFileSync('./public/js/balance2.js', `const data2 = ${resultat2}`);
 
 
             del(['excel/' + filename]).then(paths => {

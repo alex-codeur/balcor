@@ -1,12 +1,12 @@
 const data = [
   {
-    "Comptes": 101100,
+    "Comptes": 101,
     "Libelles": "CAPITAL SOCIAL",
     "Credit_Ouv": 171706,
     "Credit_Sold": 171706
   },
   {
-    "Comptes": 131100,
+    "Comptes": 10110000,
     "Libelles": "RESULTAT BENEFICE",
     "Credit_Ouv": 3335871,
     "Credit_Sold": 3335871
@@ -24,7 +24,7 @@ const data = [
     "Debit_Sold": 400000
   },
   {
-    "Comptes": 244210,
+    "Comptes": 10210000,
     "Libelles": "MATERIEL INFORMATIQUE",
     "Debit_Ouv": 295625,
     "Debit_Sold": 295625
@@ -123,7 +123,7 @@ const data = [
     "Credit_Sold": 4550221
   },
   {
-    "Comptes": 521000,
+    "Comptes": 41113000,
     "Libelles": "BANQUE",
     "Debit_Ouv": 846950,
     "Debit_Sold": 846950

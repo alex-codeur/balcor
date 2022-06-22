@@ -1,4 +1,4 @@
-const data = {
+const data2 = {
   "Feuil1": [
     {
       "A": "10110000",
