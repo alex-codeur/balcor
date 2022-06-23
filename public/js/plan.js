@@ -1815,14 +1815,14 @@ const comptes = [
       id: 41119000,
       libelle: "Clients Etrangers"
     },
-    {
-      id: 411ASSEM,
-      libelle: "Mme ASSEMBE EPSE ZANG III SAM Anny"
-    },
-    {
-      id: 411ROCHE,
-      libelle: "ROCHE CAMEROUN SARL"
-    },
+    // {
+    //   id: 411ASSEM,
+    //   libelle: "Mme ASSEMBE EPSE ZANG III SAM Anny"
+    // },
+    // {
+    //   id: 411ROCHE,
+    //   libelle: "ROCHE CAMEROUN SARL"
+    // },
     {
       id: 411,
    libelle: "CLIENTS"
@@ -5256,7 +5256,7 @@ const comptes = [
       libelle: "PRESTATIONS EXONEREES"
     },
     {
-      id: 7061",
+      id: 7061,
     libelle: "MONITORING LOCALE"
     },
     {
@@ -5300,7 +5300,7 @@ const comptes = [
       libelle: "aux entreprises du groupe hors Régi"
     },
     {
-      id: 706",
+      id: 706,
    libelle: "SERVICES VENDUS"
     },
     {
@@ -5436,7 +5436,7 @@ const comptes = [
       libelle: "Autres produits divers"
     },
     {
-      id: 758",
+      id: 758,
    libelle: "PRODUITS DIVERS"
     },
     {

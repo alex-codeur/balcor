@@ -43,6 +43,10 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/plan', (req, res) => {
+    res.render('plan', { layout: './layouts/balcor-layout' });
+});
+
 app.get('/balcor', (req, res) => {
     res.render('balcor', { layout: './layouts/balcor-layout' });
 });
