@@ -1481,7 +1481,7 @@ document.getElementById("tableur").innerHTML = `
             d.Comptes === parseInt(91600000) ||
             d.Comptes === parseInt(91700000) ||
             d.Comptes === parseInt(91800000)
-            ? 'style="background-color: #75DC85;"' : 'style="background-color: #F5476B;"'}>${d.Comptes ? d.Comptes : ''}</td>
+            ? 'style="background-color: #75DC85;" data-bs-toggle="tooltip" data-bs-placement="top" title="Le numero de compte est conforme."' : 'style="background-color: #F5476B;" data-bs-toggle="tooltip" data-bs-placement="top" title="Le numero de compte n\'est pas conforme."'}>${d.Comptes ? d.Comptes : ''}</td>
                         <td>${d.Libelles ? d.Libelles : ''}</td>
                         <td>${d.Debit_Ouv ? d.Debit_Ouv : ''}</td>
                         <td>${d.Credit_Ouv ? d.Credit_Ouv : ''}</td>
